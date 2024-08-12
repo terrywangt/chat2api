@@ -12,6 +12,14 @@ services:
     environment:
       - TZ=Asia/Shanghai # 设置时区
       - ARK0SE_TOKEN_URL=http://ark0se:5006/token # 已内置，不要改动
+      - PROXY=socks5://chatgpt-proxy-server-warp:65535
+    depends_on:
+      - chatgpt-proxy-server-warp
+
+  chatgpt-proxy-server-warp:
+    container_name: chatgpt-proxy-server-warp
+    image: linweiyuan/chatgpt-proxy-server-warp
+    restart: unless-stopped
 
   ark0se:
     image: lanqian528/funcaptcha_solver:latest
